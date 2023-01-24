@@ -16,7 +16,7 @@ public class LevelWall : MonoBehaviour
     {
         if (other.TryGetComponent<Obstacle>(out Obstacle obstacle))
         {
-            _UIMenu.ActiveMenuLose();
+            obstacle.Lose();
         }
     }
 }

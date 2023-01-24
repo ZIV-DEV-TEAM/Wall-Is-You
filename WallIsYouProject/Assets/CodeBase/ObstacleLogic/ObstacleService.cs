@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,8 +8,8 @@ using Zenject;
 
 public class ObstacleService : MonoBehaviour, IDataPersistence
 {
+    public event Action<Obstacle> OnChanged;
     [SerializeField] private float _delayToDestroyObstacle = 1;   
-    [SerializeField] private Transform _hint;   
     [SerializeField] private List<ObstacleMovement> _obstacles = new List<ObstacleMovement>();
 
     private UIMenu _UIMenu;
@@ -36,17 +37,13 @@ public class ObstacleService : MonoBehaviour, IDataPersistence
         if (_obstacles.Count != 1 && !_obstacles[_obstacles.Count-1].IsActive)
         {
             ActivateObstacle();
-            MoveHint();
+            OnChanged?.Invoke(_obstacles[_currentObstacle]);
         }
     }
     public void ActivateObstacle()
     {
         _currentObstacle++;
         _obstacles[_currentObstacle].IsActive = true;
-    }
-    private void MoveHint()
-    {
-        _hint.position = new Vector3(_hint.position.x, _hint.position.y, _obstacles[_currentObstacle].transform.position.z);
     }
     IEnumerator DestroyObstacle()
     {
@@ -78,5 +75,13 @@ public class ObstacleService : MonoBehaviour, IDataPersistence
     public void SaveData(GameData data)
     {
         data.LevelNumber = _curentlevel;
+    }
+    public virtual void AddObserver(Action<Obstacle> OnChangedFunc)
+    {
+       OnChanged += OnChangedFunc;
+    }
+    public virtual void RemoveObserver(Action<Obstacle> OnChangedFunc)
+    {
+        OnChanged -= OnChangedFunc;
     }
 }

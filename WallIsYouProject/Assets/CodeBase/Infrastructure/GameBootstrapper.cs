@@ -21,7 +21,7 @@ namespace CodeBase.Infrastructure
         }
         private void Awake()
         {
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(gameObject);
         }
         public void SaveData(GameData data)
         {
@@ -30,7 +30,6 @@ namespace CodeBase.Infrastructure
         private void Start()
         {
             _gameStateMachine.Enter<BootstrapState, int>(level);
-            DontDestroyOnLoad(gameObject);
         }
     }
 }

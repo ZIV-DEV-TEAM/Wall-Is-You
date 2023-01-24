@@ -819,6 +819,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1163937256, guid: 72d292e385a51a84583262d8cbc8f692, type: 3}
+      propertyPath: _obstacleService
+      value: 
+      objectReference: {fileID: 2204500385678769910}
     - target: {fileID: 6823061358507717761, guid: 72d292e385a51a84583262d8cbc8f692,
         type: 3}
       propertyPath: m_Name
@@ -3672,7 +3676,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delayToDestroyObstacle: 1
-  _hint: {fileID: 0}
   _obstacles:
   - {fileID: 9118710934057886875}
   - {fileID: 7456584999174128888}
@@ -4041,8 +4044,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstacleService: {fileID: 2204500385678769910}
   IsActive: 0
-  _moveSpeed: 1
-  _rotateSpeed: 0.3
+  _moveSpeed: 3
+  _rotateSpeed: 0.8
   _clons: []
 --- !u!64 &4552572828436122376
 MeshCollider:
@@ -4154,8 +4157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstacleService: {fileID: 2204500385678769910}
   IsActive: 0
-  _moveSpeed: 1
-  _rotateSpeed: 0.3
+  _moveSpeed: 3
+  _rotateSpeed: 0.8
   _clons: []
 --- !u!64 &5016872300179498288
 MeshCollider:
@@ -4430,8 +4433,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstacleService: {fileID: 2204500385678769910}
   IsActive: 0
-  _moveSpeed: 1
-  _rotateSpeed: 0.3
+  _moveSpeed: 3
+  _rotateSpeed: 0.8
   _clons: []
 --- !u!1 &7456584999174128887
 GameObject:
@@ -4467,8 +4470,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstacleService: {fileID: 2204500385678769910}
   IsActive: 0
-  _moveSpeed: 1
-  _rotateSpeed: 0.3
+  _moveSpeed: 3
+  _rotateSpeed: 0.8
   _clons: []
 --- !u!64 &7456584999174128889
 MeshCollider:
@@ -4583,8 +4586,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstacleService: {fileID: 2204500385678769910}
   IsActive: 0
-  _moveSpeed: 1
-  _rotateSpeed: 0.3
+  _moveSpeed: 3
+  _rotateSpeed: 0.8
   _clons: []
 --- !u!64 &8889771561143464298
 MeshCollider:
@@ -4725,8 +4728,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstacleService: {fileID: 2204500385678769910}
   IsActive: 0
-  _moveSpeed: 1
-  _rotateSpeed: 0.3
+  _moveSpeed: 3
+  _rotateSpeed: 0.8
   _clons:
   - {fileID: 6392453993471133769}
 --- !u!64 &9118710934057886876
