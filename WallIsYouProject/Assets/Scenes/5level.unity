@@ -2055,12 +2055,12 @@ PrefabInstance:
     - target: {fileID: 2636950921945947492, guid: 10b1cbced5c43964d80430c03bf94e94,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4315206131270375540, guid: 10b1cbced5c43964d80430c03bf94e94,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4878060471229357527, guid: 10b1cbced5c43964d80430c03bf94e94,
         type: 3}
@@ -3291,6 +3291,11 @@ PrefabInstance:
       propertyPath: _obstacleService
       value: 
       objectReference: {fileID: 6627359866440698795}
+    - target: {fileID: 808198395128480325, guid: 2b4c9681648bb70409faa489c3ae7f56,
+        type: 3}
+      propertyPath: PlayerShapeNumber
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3885106777434167064, guid: 2b4c9681648bb70409faa489c3ae7f56,
         type: 3}
       propertyPath: m_Name
@@ -3689,6 +3694,11 @@ PrefabInstance:
       propertyPath: _obstacleService
       value: 
       objectReference: {fileID: 6627359866440698795}
+    - target: {fileID: 808198395128480325, guid: 2b4c9681648bb70409faa489c3ae7f56,
+        type: 3}
+      propertyPath: PlayerShapeNumber
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3885106777434167064, guid: 2b4c9681648bb70409faa489c3ae7f56,
         type: 3}
       propertyPath: m_Name
