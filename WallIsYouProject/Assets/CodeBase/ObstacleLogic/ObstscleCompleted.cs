@@ -17,10 +17,10 @@ namespace Assets.CodeBase.ObstacleLogic
         }
         public void Complite()
         {
+            _obstacleService.SwitchObstacleToNext();
             _score.Add(1);
             _audioSource.Play();
             Handheld.Vibrate();
-            _obstacleService.SwitchObstacleToNext();
         }
     }
 }

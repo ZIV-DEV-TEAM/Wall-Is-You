@@ -9,7 +9,7 @@ public abstract class Shape : MonoBehaviour
     [SerializeField] private PlayerShapes _playerShape;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Obstacle obstacle))
+         if (other.TryGetComponent(out Obstacle obstacle))
         {
             obstacle.Lose();
         }
