@@ -21,7 +21,7 @@ public class PlayerShapes : MonoBehaviour
         {
             yield break;
         }
-        Handheld.Vibrate();
+        Vibrate.TriggerVibrate();
         _curentShape.gameObject.SetActive(false);
         foreach (GameObject item in _hints)
         {

@@ -20,7 +20,7 @@ namespace Assets.CodeBase.ObstacleLogic
             _obstacleService.SwitchObstacleToNext();
             _score.Add(1);
             _audioSource.Play();
-            Handheld.Vibrate();
+            Vibrate.TriggerVibrate();
         }
     }
 }

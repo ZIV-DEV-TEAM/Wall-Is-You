@@ -3345,6 +3345,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 808198395128480325, guid: 2b4c9681648bb70409faa489c3ae7f56,
         type: 3}
+      propertyPath: _obstacleService
+      value: 
+      objectReference: {fileID: 2204500385678769910}
+    - target: {fileID: 808198395128480325, guid: 2b4c9681648bb70409faa489c3ae7f56,
+        type: 3}
       propertyPath: PlayerShapeNumber
       value: 1
       objectReference: {fileID: 0}

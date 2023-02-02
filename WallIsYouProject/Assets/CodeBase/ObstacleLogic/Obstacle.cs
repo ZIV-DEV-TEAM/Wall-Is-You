@@ -18,7 +18,6 @@ public class Obstacle : MonoBehaviour
     }
     public void Lose()
     {
-        Time.timeScale = 0;
         if (_score.Value < _obstacleContinue)
         {
             _UIMenu.ActiveMenuLose();

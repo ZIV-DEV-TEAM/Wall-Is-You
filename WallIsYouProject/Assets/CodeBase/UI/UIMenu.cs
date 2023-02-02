@@ -16,6 +16,10 @@ public class UIMenu : MonoBehaviour
     {
         _state = state;
     }
+    public void ToggleVibration(bool enable)
+    {
+        Vibrate.IsVibrationOn = enable;
+    }
     public void ToggleMusic(bool enable)
     {
         if (enable)
@@ -42,14 +46,17 @@ public class UIMenu : MonoBehaviour
     }
     public void ActiveMenuWin()
     {
+        StopGame();
         _menuWin.SetActive(true);
     }
     public void ActiveMenuLoseWithContinue()
     {
+        StopGame();
         _menuLoseWithContinue.SetActive(true);
     }
     public void ActiveMenuLose()
     {
+        StopGame();
         _menuLose.SetActive(true);
     }
     public void StopGame()
@@ -62,13 +69,16 @@ public class UIMenu : MonoBehaviour
     }
     public void Restart()
     {
-        Time.timeScale = 1.0f;
+        StartGame();
        _state.Enter<LoadLevelState, int>(SceneManager.GetActiveScene().buildIndex);
+        StartGame();
     }
     public void NextLevel()
     {
-        Time.timeScale = 1.0f;
+        StartGame();
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         _state.Enter<LoadLevelState, int>(currentScene+1);
+        StartGame();
+
     }
 }
