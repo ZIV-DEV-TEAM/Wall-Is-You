@@ -11,6 +11,8 @@ public abstract class Shape : MonoBehaviour
     {
          if (other.TryGetComponent(out Obstacle obstacle))
         {
+            
+            
             obstacle.Lose();
         }
         else if(other.TryGetComponent(out ObstscleCompleted obstacleComplited))

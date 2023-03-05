@@ -4,5 +4,5 @@ using UnityEngine.UI;
 
 public class Score : BankDefault
 {
-
+    
 }

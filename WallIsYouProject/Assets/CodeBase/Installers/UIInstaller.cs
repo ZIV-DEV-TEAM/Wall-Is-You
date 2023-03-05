@@ -1,5 +1,6 @@
 using UnityEngine;
 using Zenject;
+using UI;
 
 namespace Assets.CodeBase.Installers
 {

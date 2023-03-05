@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
+using UI;
 
 public class ObstacleService : MonoBehaviour, IDataPersistence
 {
