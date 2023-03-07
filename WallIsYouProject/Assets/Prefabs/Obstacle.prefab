@@ -148,5 +148,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObstacleQuantity: 1
-  moveSpeed: 1
-  rotateSpeed: 1
+  moveSpeed: 5
+  rotateSpeed: 1.7
