@@ -22,18 +22,18 @@ namespace UI
             leaderboard.SubscribeInstantiate(_playerInfoInstantiated);
         }
 
-        private void SubscribeClose(UnityAction action, int score)
+        private void SubscribeClose(UnityAction action, int dieCount)
         {
             closeButton.onClick.RemoveAllListeners();
             closeButton.onClick.AddListener(action);
-            StartCoroutine(leaderboard.SubmitScoreRoutine(score));
+            StartCoroutine(leaderboard.SubmitScoreRoutine(dieCount));
         }
 
-        private void PlayerInfoInstantiate(string name, string score)
+        private void PlayerInfoInstantiate(string name, string dieCount)
         {
-            playerInfo.SetInfo(name,score);
+            playerInfo.SetInfo(name,dieCount);
         }
     }
 
-    public delegate void PlayerInfoInstantiated(string name,string score);
+    public delegate void PlayerInfoInstantiated(string name,string dieCount);
 }

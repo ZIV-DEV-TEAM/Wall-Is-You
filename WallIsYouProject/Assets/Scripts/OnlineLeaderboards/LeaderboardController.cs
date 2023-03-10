@@ -90,7 +90,7 @@ namespace OnlineLeaderboards
                 if (response.success)
                 {
                     string tempPlayerNames = "Names\n";
-                    string tempPlayerScores = "Scores\n";
+                    string tempPlayerScores = "Die Count\n";
 
                     LootLockerLeaderboardMember[] members = response.items;
                     for (int i = 0; i < members.Length; i++)

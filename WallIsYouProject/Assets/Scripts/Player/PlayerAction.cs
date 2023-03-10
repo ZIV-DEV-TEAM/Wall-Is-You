@@ -11,12 +11,15 @@ namespace Player
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private float speed = 5f;
         [SerializeField] private Score score;
+        [SerializeField] private Death deathBank;
         [SerializeField] private MeshFilter meshFilter;
         [SerializeField] private MeshCollider meshCollider;
+
         private PositionController _positionController;
 
-        private bool _isPaused;
+        public bool _isPaused;
         private bool _isDead;
+        private float _currentSpeed;
         private ChangeMesh _changeMesh;
         private event Die _die;
         private Reborn _reborn;
@@ -27,8 +30,10 @@ namespace Player
         public Reborn RebornDelegate => _reborn;
         public PauseDelegate PauseDelegate => _pauseDelegate;
         public Score Score => score;
+        public Death DeathBank => deathBank;
 
-        public void Construct(PositionController positionController,bool isPaused, bool isDead, ChangeMesh changeMesh, Die die, Reborn reborn, PauseDelegate pauseDelegate, Vector3 direction)
+        public void Construct(PositionController positionController, bool isPaused, bool isDead, ChangeMesh changeMesh,
+            Die die, Reborn reborn, PauseDelegate pauseDelegate, Vector3 direction)
         {
             _positionController = positionController;
             _isPaused = isPaused;
@@ -39,9 +44,10 @@ namespace Player
             _pauseDelegate = pauseDelegate;
             _direction = direction;
         }
+
         void Awake()
         {
-            _changeMesh = new ChangeMesh(meshCollider, meshFilter);   
+            _changeMesh = new ChangeMesh(meshCollider, meshFilter);
             _direction = Vector3.forward;
             _pauseDelegate = Pause;
             _reborn = Reborn;
@@ -49,8 +55,9 @@ namespace Player
 
         void FixedUpdate()
         {
-            if (_isDead || _isPaused) return;
-            rigidbody.velocity = _direction * speed;
+            if (_isDead || _isPaused) _currentSpeed = 0;
+            else _currentSpeed = speed;
+            rigidbody.velocity = _direction * _currentSpeed;
         }
 
         public void AddScore(int value = 1)
@@ -61,7 +68,7 @@ namespace Player
         public void Die()
         {
             _isDead = true;
-            Debug.Log("Die");
+            deathBank.Add(1);
             _die?.Invoke();
         }
 
@@ -91,9 +98,8 @@ namespace Player
             var position = _positionController.GetPosition(key).transform.position;
             transform.DOMoveX(position.x, 0.5f);
             transform.DOMoveY(position.y, 0.5f);
-            //transform.DORotate(new Vector3(0, transform.rotation.eulerAngles.y+180,  transform.rotation.eulerAngles.z+180), 0.5f);
         }
-        
+
 
         public void SetMesh(Mesh newMesh)
         {
@@ -103,7 +109,8 @@ namespace Player
         public void Clone(Mesh newMesh, int key)
         {
             var clone = Instantiate(this);
-            clone.Construct(_positionController, _isPaused, _isDead, _changeMesh, _die, _reborn, _pauseDelegate, _direction);
+            clone.Construct(_positionController, _isPaused, _isDead, _changeMesh, _die, _reborn, _pauseDelegate,
+                _direction);
             clone.SetPosition(key);
             clone.SetMesh(newMesh);
         }
