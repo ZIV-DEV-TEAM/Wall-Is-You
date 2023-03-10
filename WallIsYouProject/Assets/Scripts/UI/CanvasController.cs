@@ -1,6 +1,5 @@
 using Level;
 using Player;
-using UI.PlayPanel;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -61,7 +60,7 @@ namespace UI
 
         private void InitializeDelegates()
         {
-            _dieDelegate = GameOverPanel;
+            _dieDelegate = OnGameOverPanel;
             _pauseDelegate = OnPausePanel;
             _winDelegate = WinPanel;
         }
@@ -91,9 +90,12 @@ namespace UI
             _initReborn.Initialize(player.RebornDelegate);
             _initReborn.Initialize(OnPlayPanel);
 
-            _initWin = levelControl;
-            _initWin.Initialize(_winDelegate);
-
+            if (levelControl != null && levelControl.gameObject.activeInHierarchy)
+            {
+                _initWin = levelControl;
+                _initWin.Initialize(_winDelegate);
+            }
+            
             leaderBoardPanel.TryGetComponent(out Leaderboard leaderboard);
             _leaderboard += leaderboard.LeaderboardDelegate;
             _pause += player.PauseDelegate;
@@ -109,11 +111,6 @@ namespace UI
             _changePanel.SetPanel(pausePanel);
         }
 
-        private void GameOverPanel()
-        {
-            OnLeaderboard();
-            _leaderboard?.Invoke(OnGameOverPanel, player.Score.Value);
-        }
 
         private void OnGameOverPanel()
         {
@@ -123,7 +120,7 @@ namespace UI
         private void WinPanel()
         {
             OnLeaderboard();
-            _leaderboard?.Invoke(OnWinPanel, player.Score.Value);
+            _leaderboard?.Invoke(OnWinPanel, player.DeathBank.Value);
         }
 
         private void OnWinPanel()

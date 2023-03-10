@@ -15,14 +15,16 @@ namespace Player
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private float speed = 5f;
         [SerializeField] private Score score;
+        [SerializeField] private Death deathBank;
         [SerializeField] private MeshFilter meshFilter;
         [SerializeField] private MeshCollider meshCollider;
         [SerializeField] private SpawnHint spawnHint;
         private PositionController _positionController;
 
-        private bool _isPaused;
+        public bool _isPaused;
         private bool _isDead;
         protected ChangeMesh _changeMesh;
+        private float _currentSpeed;
         private event Die _die;
         public event UnityAction<Mesh> PlayerChangedMesh;
         public event UnityAction<Vector3> PlayerChangedPosition;
@@ -35,6 +37,7 @@ namespace Player
         public Reborn RebornDelegate => _reborn;
         public PauseDelegate PauseDelegate => _pauseDelegate;
         public Score Score => score;
+        public Death DeathBank => deathBank;
 
         public void Construct(PositionController positionController,bool isPaused, bool isDead, Die die, Reborn reborn, PauseDelegate pauseDelegate)
         {
@@ -45,9 +48,10 @@ namespace Player
             _reborn = reborn;
             _pauseDelegate = pauseDelegate;
         }
+
         void Awake()
         {
-            _changeMesh = new ChangeMesh(meshCollider, meshFilter);   
+            _changeMesh = new ChangeMesh(meshCollider, meshFilter);
             _direction = Vector3.forward;
             _pauseDelegate = Pause;
             _reborn = Reborn;
@@ -55,8 +59,9 @@ namespace Player
 
         void FixedUpdate()
         {
-            if (_isDead || _isPaused) return;
-            rigidbody.velocity = _direction * speed;
+            if (_isDead || _isPaused) _currentSpeed = 0;
+            else _currentSpeed = speed;
+            rigidbody.velocity = _direction * _currentSpeed;
         }
 
         public void AddScore(int value = 1)
@@ -67,7 +72,7 @@ namespace Player
         public void Die()
         {
             _isDead = true;
-            Debug.Log("Die");
+            deathBank.Add(1);
             _die?.Invoke();
         }
 

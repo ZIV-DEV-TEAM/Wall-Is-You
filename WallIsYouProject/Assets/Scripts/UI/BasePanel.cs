@@ -6,9 +6,9 @@ namespace UI
 {
     public abstract class BasePanel : MonoBehaviour
     {
-        [SerializeField] private Button restartButton;
-        [SerializeField] private Button continueButton;
-        private void Start()
+        [SerializeField] protected Button restartButton;
+        [SerializeField] protected Button continueButton;
+        protected virtual void Start()
         {
             restartButton.onClick.AddListener(OnRestart);
             if (continueButton != null)
