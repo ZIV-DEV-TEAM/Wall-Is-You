@@ -3151,9 +3151,10 @@ MonoBehaviour:
   rigidbody: {fileID: 604849013}
   speed: 3.7
   score: {fileID: 1619309720}
+  deathBank: {fileID: 0}
   meshFilter: {fileID: 604849011}
   meshCollider: {fileID: 604849015}
-  spawnHint: {fileID: 0}
+  _isPaused: 0
 --- !u!64 &604849015
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6936,6 +6937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartButton: {fileID: 727050622}
   continueButton: {fileID: 1174846368}
+  score: {fileID: 1619309720}
 --- !u!1 &2067165303
 GameObject:
   m_ObjectHideFlags: 0

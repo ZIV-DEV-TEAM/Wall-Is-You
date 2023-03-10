@@ -18,7 +18,6 @@ namespace Player
         [SerializeField] private Death deathBank;
         [SerializeField] private MeshFilter meshFilter;
         [SerializeField] private MeshCollider meshCollider;
-        [SerializeField] private SpawnHint spawnHint;
         private PositionController _positionController;
 
         public bool _isPaused;
