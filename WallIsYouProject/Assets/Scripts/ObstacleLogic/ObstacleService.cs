@@ -1,21 +1,28 @@
 using System.Collections.Generic;
 using Input;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ObstacleLogic
 {
     public class ObstacleService : MonoBehaviour
     {
+        public event UnityAction<float> ObtacleSwitch;
         [SerializeField] private List<MoveObstacle> obstacles;
         [SerializeField] private List<CompleteTrigger> completeTriggers;
         [SerializeField] private MoveObstacle[] curentObstacles;
         private InputService _inputService;
+
 
         public void SetInputService(InputService inputService)
         {
             _inputService = inputService;
         }
     
+        public float GetCurentZPosition()
+        {
+            return curentObstacles[0].transform.position.z;
+        }
         private void Start()
         {
             foreach (CompleteTrigger item in completeTriggers)
@@ -46,8 +53,9 @@ namespace ObstacleLogic
                 obstacles.RemoveAt(0);
             }
             curentObstacles = newCurrentObstacles;
+            ObtacleSwitch?.Invoke(curentObstacles[0].transform.position.z);
         }
-
+        
         private void OnDestroy()
         {
 

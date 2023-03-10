@@ -3,22 +3,30 @@ using DG.Tweening;
 using OnlineLeaderboards;
 using UI;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Events;
 
 namespace Player
 {
     public class PlayerAction : MonoBehaviour, IInteractable, IInit<Die>
     {
+        public event UnityAction DestroyPlayer;
+
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private float speed = 5f;
         [SerializeField] private Score score;
         [SerializeField] private MeshFilter meshFilter;
         [SerializeField] private MeshCollider meshCollider;
+        [SerializeField] private SpawnHint spawnHint;
         private PositionController _positionController;
 
         private bool _isPaused;
         private bool _isDead;
-        private ChangeMesh _changeMesh;
+        protected ChangeMesh _changeMesh;
         private event Die _die;
+        public event UnityAction<Mesh> PlayerChangedMesh;
+        public event UnityAction<Vector3> PlayerChangedPosition;
+
         private Reborn _reborn;
 
         private PauseDelegate _pauseDelegate;
@@ -28,16 +36,14 @@ namespace Player
         public PauseDelegate PauseDelegate => _pauseDelegate;
         public Score Score => score;
 
-        public void Construct(PositionController positionController,bool isPaused, bool isDead, ChangeMesh changeMesh, Die die, Reborn reborn, PauseDelegate pauseDelegate, Vector3 direction)
+        public void Construct(PositionController positionController,bool isPaused, bool isDead, Die die, Reborn reborn, PauseDelegate pauseDelegate)
         {
             _positionController = positionController;
             _isPaused = isPaused;
             _isDead = isDead;
-            _changeMesh = changeMesh;
             _die = die;
             _reborn = reborn;
             _pauseDelegate = pauseDelegate;
-            _direction = direction;
         }
         void Awake()
         {
@@ -91,24 +97,36 @@ namespace Player
             var position = _positionController.GetPosition(key).transform.position;
             transform.DOMoveX(position.x, 0.5f);
             transform.DOMoveY(position.y, 0.5f);
+            PlayerChangedPosition?.Invoke(position);
             //transform.DORotate(new Vector3(0, transform.rotation.eulerAngles.y+180,  transform.rotation.eulerAngles.z+180), 0.5f);
         }
-        
 
+        private void OnDestroy()
+        {
+            DestroyPlayer?.Invoke();
+            DestroyPlayer = null;
+            PlayerChangedMesh = null;
+            PlayerChangedPosition = null;
+        }
         public void SetMesh(Mesh newMesh)
         {
             _changeMesh.SetMesh(newMesh);
+            PlayerChangedMesh?.Invoke(newMesh);
         }
 
-        public void Clone(Mesh newMesh, int key)
+        public IInteractable Clone(Mesh newMesh, int key)
         {
             var clone = Instantiate(this);
-            clone.Construct(_positionController, _isPaused, _isDead, _changeMesh, _die, _reborn, _pauseDelegate, _direction);
+            clone.Construct(_positionController, _isPaused, _isDead, _die, _reborn, _pauseDelegate);
             clone.SetPosition(key);
             clone.SetMesh(newMesh);
+            clone.DestroyPlayer = null;
+            clone.PlayerChangedMesh = null;
+            clone.PlayerChangedPosition = null;
+            return clone;
         }
     }
-
+    
     public delegate void Reborn();
 
     public delegate void Die();
