@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public interface IObservable
+namespace Observer
 {
-    event Action<object, object> OnChanged;
+    public interface IObservable
+    {
+        event Action<object, object> OnChanged;
+    }
 }

@@ -1,35 +1,7 @@
-using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.UI;
-
-public class Score : BankDefault, IDataPersistence
+namespace Bank
 {
-    public static Score instance = null;
-    private int _moneyAmountOnStart;
-    public int GetMoneyOnLevel()
+    public class Score : BankDefault
     {
-        return Value - _moneyAmountOnStart;
-    }
-    private void Awake()
-    {
-        Initialize();
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(this);
-    }
-    public void LoadData(GameData data)
-    {
-        _bankValue.Value = data.MoneyAmount;
-    }
 
-    public void SaveData(GameData data)
-    {
-        data.MoneyAmount = Value;
     }
 }
